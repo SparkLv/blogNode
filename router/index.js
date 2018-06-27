@@ -1,5 +1,5 @@
-import tag from "tag";
+const tag = require("./tag.js");
 
-export default function(app) {
+module.exports = function(app) {
   app.get("/tag", tag);
-}
+};
