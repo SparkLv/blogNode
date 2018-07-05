@@ -1,13 +1,23 @@
 module.exports = function(sql, param, fun1, fun2) {
   const mysql = require("mysql");
-
-  const connect = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "za123123",
-    port: "3306",
-    database: "blog"
-  });
+  let connect = null;
+  if (process.env.NODE_ENV === "production") {
+    connect = mysql.createConnection({
+      host: "localhost",
+      user: "root",
+      password: "Za123123!",
+      port: "3306",
+      database: "blog"
+    });
+  } else if (process.env.NODE_ENV === "dev") {
+    connect = mysql.createConnection({
+      host: "localhost",
+      user: "root",
+      password: "za123123",
+      port: "3306",
+      database: "blog"
+    });
+  }
 
   connect.connect(function(err) {
     if (err) {
