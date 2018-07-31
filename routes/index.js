@@ -1,5 +1,6 @@
 const tag = require("./tag.js");
 const blogs = require("./blogs.js");
+const users = require('./users.js');
 const upload = require('./upload.js');
 
 module.exports = function(app) {
@@ -9,4 +10,6 @@ module.exports = function(app) {
   app.route("/blogs/:id").patch(blogs.patch).delete(blogs.delete).get(blogs.getById);
   app.route('/blogs/getByPage').post(blogs.getByPage);
   app.route('/blog/upload').post(upload.upload);
+  app.route('/login').post(users.login);
+  app.route('/validToken').get(users.validToken);
 };

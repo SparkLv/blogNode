@@ -28,14 +28,19 @@ module.exports = {
     con(sql.queryById,[req.params.id],function(result){res.send(result[0])},function(err){util.res400(err,res)});
   },
   getByPage:function(req,res){
-    con(sql.queryByPage,[(req.body.pageNum-1)*req.body.pageSize,req.body.pageSize],function(result){
-      con(sql.getTotal,[],function(result2){
-        const obj = {
-          total:JSON.parse(JSON.stringify(result2))[0]["count(*)"],
-          data:result
-        }
-        res.send(obj)
-      },function(err){util.res400(err,res)})
+    const condi = req.body.tagId?` WHERE tags like '%${req.body.tagId}' OR tags like '${req.body.tagId}%'`:""
+    const sql0 = "SELECT * FROM blogs " + condi +" limit ?,?";
+    con(sql0,[(req.body.pageNum-1)*req.body.pageSize,req.body.pageSize],function(result){
+      con(tagSql.query,[],function(tags){
+        const resultM = getTagsObj(result,tags);
+        con(sql.getTotal,[],function(result2){
+          const obj = {
+            total:JSON.parse(JSON.stringify(result2))[0]["count(*)"],
+            data:resultM
+          }
+          res.send(obj)
+        },function(err){util.res400(err,res)})
+      })
     },function(err){util.res400(err,res)});
   },
   post: function(req, res) {
