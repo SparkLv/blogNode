@@ -12,10 +12,12 @@ module.exports = {
   post: function(req, res) {
     const param = [req.body.name,req.body.color,req.body.bgColor,req.body.code];
     const param2 = [req.body.code];
-    con(sql.insert,param,function(result) {
+    util.validateToken(function(){
+      con(sql.insert,param,function(result) {
         param2.push(result.insertId)
         con(sql.insertRe,param2,function() {res.send("操作成功");},function(err) {util.res400(err,res);});
-    },function(err) {util.res400(err,res);});
+      },function(err) {util.res400(err,res);});
+    },req,res)
   },
   patch: function(req, res) {
     const param = [req.body.name,req.body.color,req.body.bgColor,req.body.code,req.params.id];
