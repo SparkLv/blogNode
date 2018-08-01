@@ -1,5 +1,5 @@
 const jwt = require("jwt-simple");
-
+const util = require("./util.js");
 module.exports = {
   login: function(req, res) {
     if (req.body.username === "lwb" && req.body.password === "qwe123123") {
@@ -20,24 +20,11 @@ module.exports = {
     }
   },
   validToken(req, res) {
-    try {
-      var tokenObj = jwt.decode(req.headers.token, "jwtTokenSecret");
-      if (tokenObj.iss == 24 && tokenObj.exp > Date.now()) {
-        res.send({
-          code: 1,
-          message: "token有效"
-        });
-      } else {
-        res.send({
-          code: 1001,
-          message: "token无效"
-        });
-      }
-    } catch (err) {
+    util.validateToken(function() {
       res.send({
-        code: 1001,
-        message: "token无效"
+        code: 1,
+        message: "token有效"
       });
-    }
+    },req,res);
   }
 };
