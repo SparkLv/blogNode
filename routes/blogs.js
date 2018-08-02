@@ -44,7 +44,7 @@ module.exports = {
     },function(err){util.res400(err,res)});
   },
   post: function(req, res) {
-    const param = [req.body.title,req.body.content,req.body.tags,req.body.imgUrl,req.body.updateTime,req.body.remark];
+    const param = [req.body.title,req.body.content,req.body.tags,req.body.imgUrl,req.body.updateTime,req.body.remark,req.body.keyword];
     util.validateToken(function(){
       con(sql.insert,param,function(result) {
         res.send("操作成功");
