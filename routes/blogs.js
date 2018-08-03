@@ -52,7 +52,7 @@ module.exports = {
     },req,res)
   },
   patch: function(req, res) {
-    const param = [req.body.title,req.body.content,req.body.tags,req.body.imgUrl,req.body.updateTime,req.body.remark];    
+    const param = [req.body.title,req.body.content,req.body.tags,req.body.imgUrl,req.body.updateTime,req.body.remark,req.body.keyword,req.params.id];    
     con(sql.update,param,function() {res.send("操作成功");},function(err){util.res400(err,res)});
   },
   delete: function(req, res) {
