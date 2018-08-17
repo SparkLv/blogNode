@@ -6,7 +6,7 @@ module.exports = function (sql, param, fun1, fun2) {
     user: "root",
     password: "Za123123!",
     port: "3306",
-    database: "blog"
+    database: "loveon"
   });
 
 
