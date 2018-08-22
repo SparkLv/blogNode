@@ -29,5 +29,11 @@ module.exports = {
         message: "token无效"
       });
     }
+  },
+  getRandom(num) {
+    const ma = Math.floor(Math.pow(10, num) * Math.random());
+    const $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz';
+    const chart = $chars.split('')[Math.floor(Math.random() * 41)];
+    return ma + chart;
   }
 };

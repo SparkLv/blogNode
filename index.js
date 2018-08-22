@@ -3,8 +3,6 @@ const Router = require("./routes");
 const app = express();
 const bodyParser = require("body-parser");
 
-const loveonio = require('./routes/loveon/socket');
-
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -23,6 +21,4 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 Router(app);
 
-const server = app.listen(2420);
-
-// loveonio.init();
+app.listen(2420);
