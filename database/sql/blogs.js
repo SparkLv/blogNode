@@ -1,7 +1,7 @@
 module.exports = {
-    query:'SELECT * FROM blogs',
+    query:'SELECT * FROM blogs order by id desc',
     queryById:'SELECT * FROM blogs WHERE id = ?',
-    queryByPage:'SELECT * FROM blogs limit ?,?',
+    queryByPage:'SELECT * FROM blogs order by id desc limit ?,?',
     queryBlogsTag:'SELECT * FROM tags WHERE id IN( ? )',
     getTotal:'select count(*) from blogs',
     insert: "INSERT INTO blogs(title,content,tags,imgUrl,updateTime,remark,keyword) VALUES(?,?,?,?,?,?,?)",
