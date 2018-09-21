@@ -28,8 +28,8 @@ module.exports = {
     con(sql.queryById,[req.params.id],function(result){res.send(result[0])},function(err){util.res400(err,res)});
   },
   getByPage:function(req,res){
-    const condi = req.body.tagId?` WHERE tags like '%${req.body.tagId}' OR tags like '${req.body.tagId}%' order by id desc`:""
-    const sql0 = "SELECT * FROM blogs " + condi +" limit ?,?";
+    const condi = req.body.tagId?` WHERE tags like '%${req.body.tagId}' OR tags like '${req.body.tagId}%'`:""
+    const sql0 = "SELECT * FROM blogs " + condi +" order by id desc limit ?,?";
     con(sql0,[(req.body.pageNum-1)*req.body.pageSize,req.body.pageSize],function(result){
       con(tagSql.query,[],function(tags){
         const resultM = getTagsObj(result,tags);
